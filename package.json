@@ -1,0 +1,26 @@
+{
+  "name": "deforestation-io",
+  "version": "1.0.0",
+  "description": "Global deforestation monitoring platform with interactive maps and live data",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx http-server -p 8000 -o",
+    "dev": "npx http-server -p 8000 -o --cors"
+  },
+  "keywords": [
+    "deforestation",
+    "forest",
+    "monitoring",
+    "environment",
+    "maps",
+    "leaflet",
+    "air-quality"
+  ],
+  "author": "deforestation.io Team",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

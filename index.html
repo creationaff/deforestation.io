@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>deforestation.io - Global Deforestation Monitor</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="polish.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-tree"></i>
+                <h1>deforestation.io</h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item critical" data-tooltip="Daily forest loss measured in hectares. This represents the total area of forest cleared today across all monitored regions worldwide.">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="stat-content">
+                        <span class="stat-label">Forest Loss Today</span>
+                        <span class="stat-value" id="daily-loss">Loading...</span>
+                    </div>
+                </div>
+                <div class="stat-item" data-tooltip="Total CO₂ released into the atmosphere from deforestation today. Trees store carbon, and when cut down, they release this stored carbon as CO₂.">
+                    <i class="fas fa-globe-americas"></i>
+                    <div class="stat-content">
+                        <span class="stat-label">CO₂ Released</span>
+                        <span class="stat-value" id="co2-released">Loading...</span>
+                    </div>
+                </div>
+                <div class="stat-item" data-tooltip="Global average Air Quality Index. Higher numbers indicate worse air quality. Deforestation contributes to poor air quality by removing natural air filters.">
+                    <i class="fas fa-wind"></i>
+                    <div class="stat-content">
+                        <span class="stat-label">Global AQI</span>
+                        <span class="stat-value" id="global-aqi">Loading...</span>
+                    </div>
+                </div>
+                <div class="stat-item" data-tooltip="Number of active deforestation hotspots currently being monitored. These are areas with ongoing or recent forest clearing activity detected by satellite imagery.">
+                    <i class="fas fa-fire"></i>
+                    <div class="stat-content">
+                        <span class="stat-label">Active Hotspots</span>
+                        <span class="stat-value" id="active-hotspots">Loading...</span>
+                    </div>
+                </div>
+                <div class="stat-item" data-tooltip="Urgency indicator based on current deforestation rates. At current rates, we have limited time to prevent irreversible climate damage from forest loss.">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-content">
+                        <span class="stat-label">Time to Act</span>
+                        <span class="stat-value critical-text" id="time-remaining">URGENT</span>
+                    </div>
+                </div>
+                <div class="stat-item positive" data-tooltip="Number of trees planted today through global reforestation efforts. This represents positive action being taken to combat deforestation worldwide.">
+                    <i class="fas fa-seedling"></i>
+                    <div class="stat-content">
+                        <span class="stat-label">Trees Planted</span>
+                        <span class="stat-value" id="trees-planted">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Main Map Container -->
+            <main class="map-container">
+                <div id="map" class="map"></div>
+                
+                <!-- Map Controls - Floating -->
+                <div class="map-controls" id="map-controls">
+                    <!-- Minimized button (hidden by default) -->
+                    <div class="panel-minimize-btn minimized-btn" id="controls-minimize">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    
+                    <div class="panel-content">
+                        <div class="panel-minimize-btn header-minimize" id="controls-minimize-header">
+                            <i class="fas fa-minus"></i>
+                        </div>
+                        <div class="control-group">
+                        <button class="control-btn active" data-layer="forest-density">
+                            <i class="fas fa-tree"></i> Forest Density
+                        </button>
+                        <button class="control-btn active" data-layer="deforestation">
+                            <i class="fas fa-cut"></i> Deforestation
+                        </button>
+                        <button class="control-btn active" data-layer="air-quality">
+                            <i class="fas fa-wind"></i> Air Quality
+                        </button>
+                        <button class="control-btn" data-layer="protected-areas">
+                            <i class="fas fa-shield-alt"></i> Protected Areas
+                        </button>
+                    </div>
+                    
+                    <div class="legend" id="map-legend">
+                        <h4>Forest Coverage</h4>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #0d5016;"></span>
+                            <span>Dense Forest (80-100%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #2d7d32;"></span>
+                            <span>Moderate Forest (60-80%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #66bb6a;"></span>
+                            <span>Light Forest (40-60%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #a5d6a7;"></span>
+                            <span>Sparse Forest (20-40%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: #e8f5e8;"></span>
+                            <span>Minimal Forest (0-20%)</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Map Info Panel -->
+                <div class="map-info-panel" id="map-info">
+                    <div class="info-header">
+                        <h3>Region Information</h3>
+                        <button class="close-btn" id="close-region-info" title="Close Region Information">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="info-content">
+                        <p>Click on any region to see detailed forest coverage and deforestation data.</p>
+                    </div>
+                </div>
+
+                <!-- Region Info Toggle Button (hidden by default) -->
+                <button class="region-info-toggle" id="region-info-toggle" title="Show Region Information" style="display: none;">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+            </main>
+
+            <!-- News Panel - Floating -->
+            <aside class="news-panel" id="news-panel">
+                <!-- Minimized button (hidden by default) -->
+                <div class="panel-minimize-btn minimized-btn" id="news-minimize">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                
+                <div class="panel-content">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-newspaper"></i> Live Deforestation News</h2>
+                        <div class="panel-actions">
+                            <div class="refresh-indicator" id="news-refresh">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="panel-minimize-btn header-minimize" id="news-minimize-header">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="air-quality-section">
+                    <h3><i class="fas fa-wind"></i> Air Quality Monitor</h3>
+                    <div class="aqi-grid" id="aqi-grid">
+                        <!-- Air quality data will be populated here -->
+                    </div>
+                </div>
+
+                <div class="news-feed" id="news-feed">
+                    <!-- News articles will be populated here -->
+                </div>
+
+                <div class="deforestation-alerts">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Active Alerts</h3>
+                    <div class="alerts-list" id="alerts-list">
+                        <!-- Deforestation alerts will be populated here -->
+                    </div>
+                </div>
+            </div>
+            </aside>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-spinner">
+                <i class="fas fa-tree fa-spin"></i>
+                <p>Loading forest data...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

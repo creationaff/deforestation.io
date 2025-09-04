@@ -1,0 +1,732 @@
+/* deforestation.io - Polish & Enhancement Styles */
+
+/* Enhanced Animations */
+@keyframes floatGradient {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-20px, -20px) scale(1.1); }
+    66% { transform: translate(20px, -10px) scale(0.95); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(200%) rotate(45deg); }
+}
+
+@keyframes glow {
+    0%, 100% { 
+        text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        filter: brightness(1);
+    }
+    50% { 
+        text-shadow: 0 0 30px rgba(34, 197, 94, 0.8), 0 0 40px rgba(34, 197, 94, 0.4);
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes slideInUp {
+    from { 
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Body Enhancement */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    animation: floatGradient 30s ease-in-out infinite;
+    z-index: 0;
+}
+
+/* Enhanced Header */
+.header {
+    animation: slideInUp 0.5s ease-out;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 1px 0 rgba(34, 197, 94, 0.2) inset;
+}
+
+.logo {
+    animation: fadeInScale 0.6s ease-out 0.1s both;
+}
+
+.logo h1 {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Stat Items Polish */
+.stat-item {
+    animation: fadeInScale 0.5s ease-out;
+    animation-fill-mode: both;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item:nth-child(1) { animation-delay: 0.1s; }
+.stat-item:nth-child(2) { animation-delay: 0.2s; }
+.stat-item:nth-child(3) { animation-delay: 0.3s; }
+.stat-item:nth-child(4) { animation-delay: 0.4s; }
+.stat-item:nth-child(5) { animation-delay: 0.5s; }
+.stat-item:nth-child(6) { animation-delay: 0.6s; }
+
+.stat-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-item:hover::after {
+    left: 100%;
+}
+
+.stat-value {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+/* Enhanced Panels */
+.news-panel, .map-controls {
+    animation: fadeInScale 0.6s ease-out 0.3s both;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        0 2px 10px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.news-panel::before, .map-controls::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(34, 197, 94, 0.5),
+        transparent
+    );
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Enhanced Map Info Panel */
+.map-info-panel {
+    animation: fadeInScale 0.5s ease-out;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* News Articles Polish */
+.news-article {
+    animation: slideInUp 0.4s ease-out;
+    animation-fill-mode: both;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.news-article:nth-child(1) { animation-delay: 0.1s; }
+.news-article:nth-child(2) { animation-delay: 0.2s; }
+.news-article:nth-child(3) { animation-delay: 0.3s; }
+.news-article:nth-child(4) { animation-delay: 0.4s; }
+.news-article:nth-child(5) { animation-delay: 0.5s; }
+
+.news-article:hover {
+    transform: translateX(5px) scale(1.02);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(34, 197, 94, 0.2);
+}
+
+/* AQI Items Polish */
+.aqi-item {
+    animation: fadeInScale 0.4s ease-out;
+    animation-fill-mode: both;
+}
+
+.aqi-grid > .aqi-item:nth-child(1) { animation-delay: 0.05s; }
+.aqi-grid > .aqi-item:nth-child(2) { animation-delay: 0.1s; }
+.aqi-grid > .aqi-item:nth-child(3) { animation-delay: 0.15s; }
+.aqi-grid > .aqi-item:nth-child(4) { animation-delay: 0.2s; }
+.aqi-grid > .aqi-item:nth-child(5) { animation-delay: 0.25s; }
+.aqi-grid > .aqi-item:nth-child(6) { animation-delay: 0.3s; }
+.aqi-grid > .aqi-item:nth-child(7) { animation-delay: 0.35s; }
+.aqi-grid > .aqi-item:nth-child(8) { animation-delay: 0.4s; }
+
+.aqi-value {
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Alert Items Polish */
+.alert-item {
+    animation: slideInUp 0.4s ease-out;
+    animation-fill-mode: both;
+}
+
+.alerts-list > .alert-item:nth-child(1) { animation-delay: 0.1s; }
+.alerts-list > .alert-item:nth-child(2) { animation-delay: 0.2s; }
+.alerts-list > .alert-item:nth-child(3) { animation-delay: 0.3s; }
+
+.alert-item::before {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Button Polish */
+button, .control-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button::before, .control-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+button:active::before, .control-btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Minimize Buttons Polish */
+.minimized-btn {
+    animation: fadeInScale 0.3s ease-out;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.minimized-btn:hover {
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Scrollbar Polish */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.5), rgba(34, 197, 94, 0.3));
+    border-radius: 4px;
+    border: 1px solid rgba(15, 23, 42, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.7), rgba(34, 197, 94, 0.5));
+}
+
+/* Legend Polish */
+.legend-item {
+    transition: all 0.2s ease;
+}
+
+.legend-item:hover {
+    transform: translateX(3px);
+    background: rgba(34, 197, 94, 0.05);
+    padding-left: 5px;
+    margin-left: -5px;
+}
+
+/* Loading Animation Enhancement */
+.loading-overlay {
+    background: radial-gradient(circle at center, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1));
+}
+
+.loading-spinner {
+    animation: fadeInScale 0.5s ease-out;
+}
+
+.loading-spinner i {
+    filter: drop-shadow(0 0 20px rgba(34, 197, 94, 0.5));
+}
+
+/* Map Controls Active State */
+.control-btn.active {
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+/* Popup Polish */
+.leaflet-popup-content-wrapper {
+    animation: fadeInScale 0.3s ease-out;
+    backdrop-filter: blur(10px) saturate(150%);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Performance Optimizations */
+.news-article,
+.aqi-item,
+.alert-item {
+    will-change: transform;
+}
+
+/* Smooth Transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus States */
+button:focus-visible,
+.control-btn:focus-visible,
+input:focus-visible {
+    outline: 2px solid rgba(34, 197, 94, 0.5);
+    outline-offset: 2px;
+}
+
+/* Hover Lift Effect */
+.news-article,
+.aqi-item,
+.alert-item,
+.stat-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-article:hover,
+.aqi-item:hover,
+.alert-item:hover,
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Selection */
+::selection {
+    background: rgba(34, 197, 94, 0.3);
+    color: #fff;
+}
+
+/* Smooth Font Rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Number Animations */
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-value {
+    animation: countUp 0.5s ease-out;
+}
+
+/* Pulse Variations */
+@keyframes pulseSoft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.refresh-indicator {
+    animation: pulseSoft 2s ease-in-out infinite;
+}
+
+/* Tooltip Styles */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    color: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: normal;
+    width: 280px;
+    text-align: left;
+    z-index: 10000;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: tooltipFadeIn 0.2s ease-out;
+    pointer-events: none;
+}
+
+[data-tooltip]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(1px);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(15, 23, 42, 0.95);
+    z-index: 10001;
+    animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Tooltip positioning adjustments for edge cases */
+.header-stats .stat-item:first-child[data-tooltip]:hover::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+.header-stats .stat-item:first-child[data-tooltip]:hover::before {
+    left: 20px;
+    transform: translateX(0) translateY(1px);
+}
+
+.header-stats .stat-item:last-child[data-tooltip]:hover::after {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+}
+
+.header-stats .stat-item:last-child[data-tooltip]:hover::before {
+    left: auto;
+    right: 20px;
+    transform: translateX(0) translateY(1px);
+}
+
+/* Enhanced stat item hover for tooltip indication */
+.stat-item[data-tooltip]:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(34, 197, 94, 0.2);
+}
+
+/* Floating Minimize Button Enhancement */
+.news-panel.minimized {
+    cursor: pointer;
+    animation: floatButton 3s ease-in-out infinite;
+}
+
+.news-panel.minimized::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes floatButton {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0.3;
+    }
+}
+
+/* Ultra-Smooth Map Zoom Animations */
+.leaflet-container {
+    transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: pinch-zoom; /* Better pinch on trackpads */
+}
+
+.leaflet-zoom-animated {
+    transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+    will-change: transform;
+}
+
+.leaflet-tile {
+    transition: opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.leaflet-tile-loaded {
+    opacity: 1;
+    animation: tileLoadSmooth 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes tileLoadSmooth {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Enhanced zoom transitions for different zoom levels */
+.leaflet-zoom-anim .leaflet-zoom-hide {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+/* Smooth marker animations during zoom */
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth circle/polygon animations */
+.leaflet-interactive {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Enhanced zoom controls with smooth feedback */
+.leaflet-control-zoom {
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(15px) saturate(180%);
+    background: rgba(15, 23, 42, 0.95) !important;
+    border: 1px solid rgba(34, 197, 94, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.leaflet-control-zoom:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 197, 94, 0.2) !important;
+    transform: translateY(-2px);
+}
+
+.leaflet-control-zoom a {
+    background: transparent !important;
+    color: #22c55e !important;
+    border: none !important;
+    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important;
+    width: 36px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.leaflet-control-zoom a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.3), transparent);
+    transition: width 0.4s ease, height 0.4s ease;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.leaflet-control-zoom a:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.leaflet-control-zoom a:hover {
+    background: rgba(34, 197, 94, 0.15) !important;
+    color: #10b981 !important;
+    transform: scale(1.1);
+}
+
+.leaflet-control-zoom a:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.leaflet-control-zoom a:first-child {
+    border-bottom: 1px solid rgba(34, 197, 94, 0.2) !important;
+}
+
+/* Smooth popup animations */
+.leaflet-popup {
+    animation: popupZoomIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes popupZoomIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Smooth layer transitions */
+.leaflet-layer {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Enhanced panning smoothness */
+.leaflet-grab {
+    cursor: grab;
+}
+
+.leaflet-grabbing {
+    cursor: grabbing;
+}
+
+/* Smooth wheel zoom */
+.leaflet-container {
+    scroll-behavior: smooth;
+}
+
+/* Performance optimizations for ultra-smooth animations */
+.leaflet-zoom-animated,
+.leaflet-interactive,
+.leaflet-marker-icon,
+.leaflet-overlay-pane svg,
+.leaflet-shadow-pane,
+.leaflet-marker-pane {
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* GPU acceleration for all map panes */
+.leaflet-pane {
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Smooth fade for loading tiles with better timing */
+.leaflet-tile-container {
+    transition: opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+/* Smoother tile loading */
+.leaflet-tile {
+    will-change: opacity;
+    transform: translate3d(0, 0, 0);
+}
+
+/* Enhanced smoothness for deforestation markers */
+.deforestation-hotspot {
+    transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform, opacity;
+}
+
+/* Smooth transitions for all SVG paths */
+.leaflet-interactive path {
+    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Reduce jank during zoom */
+.leaflet-proxy {
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Mobile Touch Feedback */
+@media (hover: none) {
+    button:active,
+    .control-btn:active {
+        transform: scale(0.98);
+    }
+    
+    /* Hide tooltips on touch devices */
+    [data-tooltip]:hover::after,
+    [data-tooltip]:hover::before {
+        display: none;
+    }
+    
+    /* Enhanced touch zoom for mobile */
+    .leaflet-container {
+        touch-action: pan-x pan-y;
+    }
+    
+    .leaflet-control-zoom a {
+        padding: 12px !important;
+        font-size: 18px !important;
+    }
+}
