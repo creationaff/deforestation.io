@@ -53,7 +53,7 @@ body {
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(34, 197, 94, 0.3);
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,7 +75,7 @@ body {
 }
 
 .logo h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     -webkit-background-clip: text;
@@ -85,21 +85,36 @@ body {
 
 .header-stats {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* keep single row */
+    overflow-x: auto; /* allow scroll instead of wrap */
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Subtle scrollbar for stats row */
+.header-stats::-webkit-scrollbar {
+    height: 6px;
+}
+.header-stats::-webkit-scrollbar-track {
+    background: transparent;
+}
+.header-stats::-webkit-scrollbar-thumb {
+    background: rgba(34, 197, 94, 0.25);
+    border-radius: 4px;
 }
 
 .stat-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 0.6rem;
+    padding: 0.6rem 0.9rem;
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid rgba(34, 197, 94, 0.2);
-    border-radius: 0.75rem;
+    border-radius: 0.65rem;
     transition: all 0.3s ease;
-    min-width: 140px;
+    min-width: 130px;
 }
 
 .stat-item:hover {
@@ -130,7 +145,7 @@ body {
 }
 
 .stat-item i {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: #22c55e;
     flex-shrink: 0;
 }
@@ -164,7 +179,7 @@ body {
 }
 
 .stat-value {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #f8fafc;
     white-space: nowrap;
@@ -190,31 +205,31 @@ body {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    width: 320px;
-    max-height: calc(100vh - 140px);
-    background: rgba(15, 23, 42, 0.98);
-    backdrop-filter: blur(25px);
-    border: 1px solid rgba(34, 197, 94, 0.4);
-    border-radius: 1rem;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(34, 197, 94, 0.1);
+    width: 300px;
+    max-height: calc(100vh - 160px);
+    background: rgba(15, 23, 42, 0.75); /* more see-through */
+    backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 0.85rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 1000;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 800; /* under popups */
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
-    animation: fadeInScale 0.6s ease-out;
+    animation: fadeInScale 0.5s ease-out;
 }
 
 .panel-header {
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid rgba(34, 197, 94, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 1001;
-    background: rgba(15, 23, 42, 0.98);
+    background: rgba(15, 23, 42, 0.6);
 }
 
 .panel-actions {
@@ -759,19 +774,21 @@ body {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: rgba(15, 23, 42, 0.98);
-    backdrop-filter: blur(25px);
-    border: 1px solid rgba(34, 197, 94, 0.4);
-    border-radius: 1rem;
-    padding: 1rem;
+    width: 360px;
+    max-height: calc(100vh - 160px);
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 0.85rem;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    z-index: 1000;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(34, 197, 94, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0.75rem;
+    z-index: 800;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
-    animation: fadeInScale 0.6s ease-out;
+    animation: fadeInScale 0.5s ease-out;
 }
 
 .map-controls .panel-minimize-btn {
@@ -850,10 +867,10 @@ body {
 
 /* Legend */
 .legend {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(15, 23, 42, 0.55);
     border: 1px solid rgba(34, 197, 94, 0.2);
-    border-radius: 0.5rem;
-    padding: 0.75rem;
+    border-radius: 0.65rem;
+    padding: 0.65rem;
     min-width: 180px;
 }
 
