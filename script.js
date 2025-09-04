@@ -54,7 +54,7 @@ class ForestAI {
             // Ultra-smooth zoom settings
             // Allow fractional zoom for ultra-smooth pinch
             zoomSnap: 0,  // No snapping for fractional zoom levels
-            zoomDelta: 0.3,  // Larger step for faster +/- and double-click
+            zoomDelta: 0.5,  // Larger step for faster +/- and double-click
             worldCopyJump: false,
             maxBounds: [[-90, -180], [90, 180]],
             maxBoundsViscosity: 1.0,
@@ -69,8 +69,8 @@ class ForestAI {
             inertiaMaxSpeed: 2000,  // Higher max speed
             easeLinearity: 0.1,  // More linear easing for smoother motion
             // Faster wheel zoom
-            wheelPxPerZoomLevel: 30,  // Fewer pixels per level => faster zoom
-            wheelDebounceTime: 10,  // Lower debounce => quicker response
+            wheelPxPerZoomLevel: 15,  // Fewer pixels per level => much faster zoom
+            wheelDebounceTime: 8,  // Lower debounce => quicker response
             // Smooth continuous zoom
             smoothWheelZoom: true,  // Enable smooth wheel zoom if available
             smoothSensitivity: 1  // Sensitivity for smooth zoom
@@ -120,7 +120,7 @@ class ForestAI {
             const rect = this.map.getContainer().getBoundingClientRect();
             const origin = this.map.containerPointToLatLng([e.clientX - rect.left, e.clientY - rect.top]);
             // Larger magnitude => faster zooming
-            const delta = -e.deltaY / 180;
+            const delta = -e.deltaY / 90;
             scheduleZoom(delta, origin);
         }, { passive: false });
     }
