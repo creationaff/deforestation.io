@@ -215,7 +215,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 800; /* under popups */
+    z-index: 1200; /* above region info */
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
     animation: fadeInScale 0.5s ease-out;
@@ -228,7 +228,7 @@ body {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    z-index: 1001;
+    z-index: 1600; /* header area for minimize sits above other panels */
     background: rgba(15, 23, 42, 0.6);
 }
 
@@ -784,7 +784,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    z-index: 800;
+    z-index: 1500; /* ensure controls header sits above region info */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateZ(0);
@@ -915,7 +915,7 @@ body {
     border-radius: 0.75rem;
     padding: 0.75rem;
     max-width: 300px;
-    z-index: 900;
+    z-index: 1100; /* below map controls and news header */
     pointer-events: auto;
     opacity: 0.9;
     transition: all 0.3s ease;
@@ -977,7 +977,7 @@ body {
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 999;
+    z-index: 1000; /* lower than panel headers so it doesn't block minimize */
 }
 
 .region-info-toggle:hover {
