@@ -1,0 +1,437 @@
+/* Mobile-specific styles for deforestation.io */
+
+/* Tablet and Mobile (768px and below) */
+@media (max-width: 768px) {
+    /* Fixed header */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2100;
+        padding: 0.4rem 0.75rem;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    
+    .logo i {
+        font-size: 1.1rem;
+    }
+    
+    /* Hide header stats on mobile */
+    .header-stats {
+        display: none !important;
+    }
+    
+    /* Full-screen map */
+    .main-content {
+        padding-top: 50px;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .map-container {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: calc(100vh - 50px);
+        width: 100vw;
+        z-index: 1;
+    }
+    
+    /* News panel as bottom sheet */
+    .news-panel:not(.minimized) {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto !important;
+        width: 100vw !important;
+        height: auto;
+        max-height: 50vh;
+        border-radius: 1.5rem 1.5rem 0 0;
+        background: rgba(15, 23, 42, 0.96);
+        backdrop-filter: blur(15px);
+        z-index: 1600;
+        transform: translateY(calc(100% - 65px));
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.5);
+        border: none;
+        overflow: hidden;
+    }
+    
+    /* Touch handle for dragging */
+    .news-panel:not(.minimized)::before {
+        content: '';
+        position: absolute;
+        top: 0.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 45px;
+        height: 5px;
+        background: rgba(148, 163, 184, 0.5);
+        border-radius: 3px;
+        z-index: 10;
+        cursor: grab;
+    }
+    
+    /* Expanded state */
+    .news-panel.mobile-expanded {
+        transform: translateY(0) !important;
+    }
+    
+    /* Panel header adjustments */
+    .panel-header {
+        padding: 0.75rem 1rem;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    
+    .panel-header h2 {
+        font-size: 1rem;
+    }
+    
+    /* News feed adjustments */
+    .news-feed {
+        max-height: calc(50vh - 100px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Minimized news panel */
+    .news-panel.minimized {
+        position: fixed !important;
+        bottom: 1rem !important;
+        left: 1rem !important;
+        top: auto !important;
+        right: auto !important;
+        width: 55px !important;
+        height: 55px !important;
+        max-height: 55px !important;
+        transform: none !important;
+        border-radius: 50% !important;
+        background: rgba(15, 23, 42, 0.95) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .news-panel.minimized::before {
+        display: none !important;
+    }
+    
+    /* Map controls - compact overlay */
+    .map-controls:not(.minimized) {
+        position: fixed !important;
+        top: 60px;
+        right: 10px;
+        left: auto !important;
+        width: auto !important;
+        max-width: 180px;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 0.4rem;
+        border-radius: 0.6rem;
+        z-index: 1400;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .map-controls.minimized {
+        display: none !important;
+    }
+    
+    /* Compact legend */
+    .legend {
+        padding: 0.4rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .legend h4 {
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .legend-item {
+        font-size: 0.65rem;
+        padding: 0.15rem 0;
+        gap: 0.4rem;
+    }
+    
+    .legend-color {
+        width: 14px;
+        height: 14px;
+    }
+    
+    /* Region info panel */
+    .map-info-panel {
+        position: fixed !important;
+        top: 60px;
+        left: 10px;
+        bottom: auto !important;
+        right: auto !important;
+        max-width: 160px;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 0.4rem;
+        font-size: 0.75rem;
+        z-index: 1300;
+        transform: none !important;
+        border-radius: 0.6rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .map-info-panel h3 {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .info-item {
+        font-size: 0.7rem;
+        padding: 0.2rem 0;
+    }
+    
+    /* Version badge position */
+    .version-badge {
+        position: fixed;
+        bottom: auto;
+        top: auto;
+        left: auto;
+        right: 10px;
+        bottom: 80px;
+        font-size: 0.5rem;
+        padding: 0.15rem 0.3rem;
+        z-index: 1350;
+        opacity: 0.7;
+    }
+    
+    /* Touch-friendly zoom controls */
+    .leaflet-control-zoom {
+        transform: scale(1.3);
+        margin: 15px !important;
+    }
+    
+    .leaflet-control-zoom a {
+        width: 36px !important;
+        height: 36px !important;
+        line-height: 36px !important;
+        font-size: 20px !important;
+    }
+    
+    /* Popup adjustments */
+    .leaflet-popup {
+        max-width: 240px !important;
+    }
+    
+    .leaflet-popup-content {
+        font-size: 0.8rem;
+        padding: 0.6rem;
+    }
+    
+    .leaflet-popup-content h3 {
+        font-size: 0.9rem;
+    }
+    
+    .leaflet-popup-content p {
+        font-size: 0.75rem;
+        margin: 0.3rem 0;
+    }
+    
+    /* Hide region toggle button on mobile */
+    .region-info-toggle {
+        display: none !important;
+    }
+    
+    /* Air quality section mobile */
+    .air-quality-section {
+        padding: 0.5rem;
+    }
+    
+    .aqi-grid {
+        gap: 0.4rem;
+    }
+    
+    .aqi-item {
+        padding: 0.4rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Deforestation alerts mobile */
+    .deforestation-alerts {
+        padding: 0.5rem;
+    }
+    
+    .alert-item {
+        padding: 0.4rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+    /* Even smaller header */
+    .header {
+        padding: 0.35rem 0.5rem;
+        height: 45px;
+    }
+    
+    .logo h1 {
+        font-size: 0.95rem;
+    }
+    
+    .logo i {
+        font-size: 0.95rem;
+    }
+    
+    /* Adjust map top position */
+    .main-content {
+        padding-top: 45px;
+    }
+    
+    .map-container {
+        top: 45px;
+        height: calc(100vh - 45px);
+    }
+    
+    /* Smaller news panel */
+    .news-panel:not(.minimized) {
+        max-height: 40vh;
+        transform: translateY(calc(100% - 55px));
+    }
+    
+    .news-panel.minimized {
+        width: 48px !important;
+        height: 48px !important;
+        bottom: 0.75rem !important;
+        left: 0.75rem !important;
+    }
+    
+    /* Smaller controls */
+    .map-controls:not(.minimized) {
+        max-width: 150px;
+        top: 55px;
+        right: 5px;
+        padding: 0.35rem;
+    }
+    
+    .legend h4 {
+        font-size: 0.7rem;
+    }
+    
+    .legend-item {
+        font-size: 0.6rem;
+    }
+    
+    /* Smaller region info */
+    .map-info-panel {
+        max-width: 140px;
+        top: 55px;
+        left: 5px;
+        padding: 0.35rem;
+    }
+    
+    .map-info-panel h3 {
+        font-size: 0.75rem;
+    }
+    
+    .info-item {
+        font-size: 0.65rem;
+    }
+    
+    /* Hide version badge on very small screens */
+    .version-badge {
+        display: none !important;
+    }
+    
+    /* Even smaller zoom controls */
+    .leaflet-control-zoom {
+        transform: scale(1.15);
+        margin: 10px !important;
+    }
+    
+    /* Smaller popups */
+    .leaflet-popup {
+        max-width: 200px !important;
+    }
+    
+    .leaflet-popup-content {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Touch interactions */
+@media (pointer: coarse) {
+    /* Larger touch targets */
+    .panel-minimize-btn,
+    .header-minimize,
+    .close-btn {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Better scroll on touch */
+    .news-feed,
+    .air-quality-section,
+    .deforestation-alerts {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Prevent accidental zoom */
+    .leaflet-container {
+        touch-action: pan-x pan-y;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header {
+        height: 40px;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .logo h1 {
+        font-size: 0.9rem;
+    }
+    
+    .main-content {
+        padding-top: 40px;
+    }
+    
+    .map-container {
+        top: 40px;
+        height: calc(100vh - 40px);
+    }
+    
+    .news-panel:not(.minimized) {
+        max-height: 70vh;
+        transform: translateY(calc(100% - 50px));
+    }
+    
+    .map-controls:not(.minimized),
+    .map-info-panel {
+        top: 45px;
+    }
+}

@@ -25,6 +25,15 @@ class ForestAI {
         this.startLiveUpdates();
         this.hideLoading();
         this.loadVersion();
+        
+        // Mobile optimizations
+        if (window.innerWidth <= 768) {
+            this.initMobileInteractions();
+            // Force map to recalculate its size
+            setTimeout(() => {
+                this.map.invalidateSize();
+            }, 100);
+        }
 
         // Mobile-first visibility: prioritize the map on initial load
         if (window.matchMedia('(max-width: 768px)').matches) {
@@ -36,6 +45,83 @@ class ForestAI {
             try { this.hideRegionInfo(); } catch {}
             // Ensure Leaflet recalculates size after layout changes
             setTimeout(() => { if (this.map) this.map.invalidateSize(); }, 100);
+        }
+    }
+    
+    initMobileInteractions() {
+        const newsPanel = document.getElementById('news-panel');
+        if (!newsPanel) return;
+        
+        // Add mobile swipe functionality
+        let startY = 0;
+        let currentY = 0;
+        let isDragging = false;
+        const panelHeader = newsPanel.querySelector('.panel-header');
+        
+        const handleStart = (e) => {
+            isDragging = true;
+            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            newsPanel.style.transition = 'none';
+        };
+        
+        const handleMove = (e) => {
+            if (!isDragging || newsPanel.classList.contains('minimized')) return;
+            
+            currentY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            const deltaY = currentY - startY;
+            
+            // Only allow dragging down (positive deltaY)
+            if (deltaY > 0) {
+                const maxHeight = window.innerHeight * 0.5;
+                const currentTransform = Math.min(deltaY, maxHeight);
+                newsPanel.style.transform = `translateY(${currentTransform}px)`;
+            }
+        };
+        
+        const handleEnd = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            newsPanel.style.transition = '';
+            const deltaY = currentY - startY;
+            
+            // If dragged more than 100px, minimize or collapse
+            if (deltaY > 100) {
+                if (newsPanel.classList.contains('mobile-expanded')) {
+                    newsPanel.classList.remove('mobile-expanded');
+                } else {
+                    this.togglePanel('news-panel');
+                }
+            } else {
+                // Snap back
+                newsPanel.style.transform = '';
+            }
+            
+            startY = 0;
+            currentY = 0;
+        };
+        
+        // Touch events
+        if (panelHeader) {
+            panelHeader.addEventListener('touchstart', handleStart, { passive: true });
+            panelHeader.addEventListener('touchmove', handleMove, { passive: true });
+            panelHeader.addEventListener('touchend', handleEnd);
+            
+            // Click to expand/collapse on mobile
+            panelHeader.addEventListener('click', (e) => {
+                if (!e.target.closest('.header-minimize') && window.innerWidth <= 768) {
+                    newsPanel.classList.toggle('mobile-expanded');
+                }
+            });
+        }
+        
+        // Hide region info on mobile by default
+        this.hideRegionInfo();
+        
+        // Ensure map controls are visible but compact
+        const mapControls = document.getElementById('map-controls');
+        if (mapControls) {
+            mapControls.classList.remove('minimized');
         }
     }
 
