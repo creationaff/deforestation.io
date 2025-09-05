@@ -25,6 +25,18 @@ class ForestAI {
         this.startLiveUpdates();
         this.hideLoading();
         this.loadVersion();
+
+        // Mobile-first visibility: prioritize the map on initial load
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            const newsPanel = document.getElementById('news-panel');
+            if (newsPanel && !newsPanel.classList.contains('minimized')) {
+                newsPanel.classList.add('minimized');
+            }
+            // Start with region info collapsed to avoid covering the map
+            try { this.hideRegionInfo(); } catch {}
+            // Ensure Leaflet recalculates size after layout changes
+            setTimeout(() => { if (this.map) this.map.invalidateSize(); }, 100);
+        }
     }
 
     showLoading() {

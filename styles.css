@@ -1088,8 +1088,8 @@ body {
     .news-panel {
         position: static;
         width: 100%;
-        max-height: none;
-        height: 35vh;
+        max-height: 35vh;
+        height: auto;
         top: auto;
         left: auto;
         border-radius: 0;
@@ -1136,13 +1136,11 @@ body {
     }
     
     .map-container {
-        height: 65vh;
+        height: calc(100vh - 160px); /* fill remaining space */
         order: 1;
     }
     
-    .news-panel {
-        order: 2;
-    }
+    .news-panel { order: 2; }
     
     .header {
         padding: 0.5rem 1rem;
