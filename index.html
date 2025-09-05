@@ -5,7 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>deforestation.io - Global Deforestation Monitor</title>
+    <title>deforestation.io — Live Global Deforestation Map, Hotspots & Air Quality</title>
+    <meta name="description" content="Live global deforestation tracker: forest density, deforestation hotspots, country & city air quality (AQI), news, alerts, and corporate accountability. Updated continuously.">
+    <meta name="keywords" content="deforestation, forest loss, air quality, AQI, rainforest, amazon, palm oil, logging, wildfires, conservation, environment, climate change, map, hotspots">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <link rel="canonical" href="https://deforestation.io/">
+    <meta name="theme-color" content="#0f172a">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="deforestation.io">
+    <meta property="og:title" content="deforestation.io — Live Global Deforestation Map">
+    <meta property="og:description" content="Explore live deforestation hotspots, forest density, and air quality with real-time news and alerts.">
+    <meta property="og:url" content="https://deforestation.io/">
+    <meta property="og:image" content="https://deforestation.io/og-cover.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="deforestation.io — Live Global Deforestation Map">
+    <meta name="twitter:description" content="Track deforestation hotspots and air quality worldwide with live data and news.">
+    <meta name="twitter:image" content="https://deforestation.io/og-cover.png">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "deforestation.io",
+        "url": "https://deforestation.io/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://deforestation.io/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="polish.css">
@@ -16,9 +47,9 @@
     <div class="app-container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">
+            <div class="logo" itemscope itemtype="https://schema.org/Organization">
                 <i class="fas fa-tree"></i>
-                <h1>deforestation.io</h1>
+                <h1 itemprop="name">deforestation.io</h1>
             </div>
             <div class="header-stats">
                 <div class="stat-item critical" data-tooltip="Daily forest loss measured in hectares. This represents the total area of forest cleared today across all monitored regions worldwide.">

@@ -1013,7 +1013,7 @@ class ForestAI {
     }
 
     startLiveUpdates() {
-        // Update news every 5 minutes
+        // Update news periodically
         this.refreshNews();
         this.newsUpdateInterval = setInterval(() => {
             this.refreshNews();
@@ -1036,10 +1036,22 @@ class ForestAI {
         const refreshBtn = document.getElementById('news-refresh');
         refreshBtn.classList.add('spinning');
 
+        // Try live fetch first, fall back to local data
+        try {
+            const articles = await this.fetchLiveDeforestationNews();
+            this.renderNews(articles);
+        } catch (e) {
+            // Fallback to local demo articles
+            const newsArticles = this.generateNewsArticles();
+            this.renderNews(newsArticles);
+        } finally {
+            setTimeout(() => refreshBtn.classList.remove('spinning'), 600);
+        }
+    }
+
+    renderNews(newsArticles) {
         // Use requestAnimationFrame for smooth updates
         requestAnimationFrame(() => {
-            // Simulate fetching news articles
-            const newsArticles = this.generateNewsArticles();
             const newsFeed = document.getElementById('news-feed');
             
             // Use DocumentFragment for better performance
@@ -1066,11 +1078,47 @@ class ForestAI {
 
             // Update alerts
             this.updateAlerts();
-
-            setTimeout(() => {
-                refreshBtn.classList.remove('spinning');
-            }, 1000);
         });
+    }
+
+    async fetchLiveDeforestationNews() {
+        // Public news APIs often require keys; we use multiple sources with graceful failover.
+        const endpoints = [
+            // GDELT 2.1 Events RSS-like API filtered by deforestation terms
+            `https://api.gdeltproject.org/api/v2/doc/doc?query=deforestation%20OR%20logging%20OR%20rainforest%20OR%20forest%20loss&mode=ArtList&format=json&maxrecords=25&timespan=1d`,
+            // NewsCatcher/ContextualWeb fallback endpoints could be added here with your API key
+        ];
+
+        for (const url of endpoints) {
+            try {
+                const res = await fetch(url, { cache: 'no-store' });
+                if (!res.ok) continue;
+                const data = await res.json();
+                // Normalize GDELT format
+                if (data && data.articles) {
+                    return data.articles.map(a => ({
+                        title: a.title,
+                        summary: a.seendate ? `${a.sourceCountry || ''} — ${a.lang || ''}` : (a.excerpt || ''),
+                        source: a.sourceCommonName || a.domain || 'GDELT',
+                        time: a.seenDate || a.seendate || 'Today',
+                        url: a.url
+                    }));
+                }
+                if (data && data.articles && Array.isArray(data.articles)) continue;
+                if (data && data.length && data[0].url) {
+                    return data.map(a => ({
+                        title: a.title,
+                        summary: a.summary || a.description || '',
+                        source: a.source || a.domain || 'News',
+                        time: a.published || a.date || 'Today',
+                        url: a.url
+                    }));
+                }
+            } catch (err) {
+                // try next endpoint
+            }
+        }
+        throw new Error('No live news');
     }
 
     generateNewsArticles() {
