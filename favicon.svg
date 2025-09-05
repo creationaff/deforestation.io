@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>deforestation.io pine tree</title>
+  <defs>
+    <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#g)" stroke="#065f46" stroke-width="2" stroke-linejoin="round">
+    <polygon points="32,6 14,26 25,26 12,40 25,40 8,56 56,56 39,40 52,40 39,26 50,26"/>
+  </g>
+  <rect x="28" y="44" width="8" height="12" fill="#14532d" rx="1"/>
+</svg>
+
