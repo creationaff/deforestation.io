@@ -22,6 +22,7 @@ class ForestAI {
         await this.initMap();
         await this.loadForestData();
         this.setupEventListeners();
+        this.setupTooltips();
         this.startLiveUpdates();
         this.hideLoading();
         this.loadVersion();
@@ -123,6 +124,77 @@ class ForestAI {
         if (mapControls) {
             mapControls.classList.remove('minimized');
         }
+    }
+    
+    setupTooltips() {
+        // Dynamic tooltip positioning to prevent clipping
+        const tooltipElements = document.querySelectorAll('[data-tooltip]');
+        
+        tooltipElements.forEach(element => {
+            let hoverTimeout;
+            
+            element.addEventListener('mouseenter', (e) => {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = setTimeout(() => {
+                    this.positionTooltip(element, e);
+                }, 100);
+            });
+            
+            element.addEventListener('mousemove', (e) => {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = setTimeout(() => {
+                    this.positionTooltip(element, e);
+                }, 50);
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+                // Reset CSS variables
+                element.style.setProperty('--tooltip-top', '');
+                element.style.setProperty('--tooltip-left', '');
+                element.style.setProperty('--tooltip-arrow-top', '');
+                element.style.setProperty('--tooltip-arrow-left', '');
+            });
+        });
+    }
+    
+    positionTooltip(element, mouseEvent) {
+        const rect = element.getBoundingClientRect();
+        const tooltipWidth = 280;
+        const tooltipHeight = 100; // Approximate height
+        const offset = 15;
+        
+        let tooltipX = rect.left + (rect.width / 2);
+        let tooltipY = rect.top - offset;
+        let arrowX = tooltipX;
+        let arrowY = rect.top;
+        
+        // Check if tooltip would go off the right edge
+        if (tooltipX + (tooltipWidth / 2) > window.innerWidth - 20) {
+            tooltipX = window.innerWidth - (tooltipWidth / 2) - 20;
+        }
+        
+        // Check if tooltip would go off the left edge
+        if (tooltipX - (tooltipWidth / 2) < 20) {
+            tooltipX = (tooltipWidth / 2) + 20;
+        }
+        
+        // Check if tooltip would go off the top edge
+        if (tooltipY - tooltipHeight < 20) {
+            // Position below the element instead
+            tooltipY = rect.bottom + offset + tooltipHeight;
+            arrowY = rect.bottom;
+            // Flip the arrow
+            element.style.setProperty('--tooltip-arrow-flip', 'rotate(180deg)');
+        } else {
+            element.style.setProperty('--tooltip-arrow-flip', 'none');
+        }
+        
+        // Set CSS custom properties for positioning
+        element.style.setProperty('--tooltip-top', `${tooltipY}px`);
+        element.style.setProperty('--tooltip-left', `${tooltipX}px`);
+        element.style.setProperty('--tooltip-arrow-top', `${arrowY}px`);
+        element.style.setProperty('--tooltip-arrow-left', `${arrowX}px`);
     }
 
     showLoading() {

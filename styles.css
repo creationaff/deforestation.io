@@ -1076,6 +1076,7 @@ body {
     
     .header-stats {
         gap: 1rem;
+        overflow-y: visible; /* Allow tooltips to show */
     }
     
     .control-btn {
