@@ -12,6 +12,7 @@ class ForestAI {
         this.newsUpdateInterval = null;
         this.aqiUpdateInterval = null;
         this.statsUpdateInterval = null;
+        this.appVersion = null;
         
         this.init();
     }
@@ -23,6 +24,7 @@ class ForestAI {
         this.setupEventListeners();
         this.startLiveUpdates();
         this.hideLoading();
+        this.loadVersion();
     }
 
     showLoading() {
@@ -1032,6 +1034,22 @@ class ForestAI {
         }, 60000);
     }
 
+    async loadVersion() {
+        try {
+            // Fetch version from package.json in repo root (served as static)
+            const res = await fetch('package.json', { cache: 'no-store' });
+            if (res.ok) {
+                const pkg = await res.json();
+                this.appVersion = pkg.version || '1.0.0';
+            }
+        } catch {}
+        // Fallback to short hash if available via meta tag future; else date
+        const versionEl = document.getElementById('app-version');
+        if (versionEl) {
+            versionEl.textContent = this.appVersion || new Date().toISOString().slice(0,10);
+        }
+    }
+
     async refreshNews() {
         const refreshBtn = document.getElementById('news-refresh');
         refreshBtn.classList.add('spinning');
@@ -1084,9 +1102,9 @@ class ForestAI {
     async fetchLiveDeforestationNews() {
         // Public news APIs often require keys; we use multiple sources with graceful failover.
         const endpoints = [
-            // GDELT 2.1 Events RSS-like API filtered by deforestation terms
-            `https://api.gdeltproject.org/api/v2/doc/doc?query=deforestation%20OR%20logging%20OR%20rainforest%20OR%20forest%20loss&mode=ArtList&format=json&maxrecords=25&timespan=1d`,
-            // NewsCatcher/ContextualWeb fallback endpoints could be added here with your API key
+            // GDELT 2.1 API filtered by deforestation terms (last 24h, English)
+            `https://api.gdeltproject.org/api/v2/doc/doc?query=(deforestation%20OR%20forest%20loss%20OR%20rainforest%20OR%20illegal%20logging)%20AND%20(language:english)&mode=ArtList&format=json&maxrecords=25&timespan=1d`,
+            // Additional endpoints with API keys can be added via env vars later
         ];
 
         for (const url of endpoints) {
@@ -1094,17 +1112,17 @@ class ForestAI {
                 const res = await fetch(url, { cache: 'no-store' });
                 if (!res.ok) continue;
                 const data = await res.json();
-                // Normalize GDELT format
-                if (data && data.articles) {
-                    return data.articles.map(a => ({
+                // Normalize common GDELT formats
+                if (data && (data.articles || data.documents)) {
+                    const list = data.articles || data.documents;
+                    return list.map(a => ({
                         title: a.title,
-                        summary: a.seendate ? `${a.sourceCountry || ''} — ${a.lang || ''}` : (a.excerpt || ''),
+                        summary: a.excerpt || a.summary || '',
                         source: a.sourceCommonName || a.domain || 'GDELT',
-                        time: a.seenDate || a.seendate || 'Today',
+                        time: a.seenDate || a.seendate || a.date || 'Today',
                         url: a.url
                     }));
                 }
-                if (data && data.articles && Array.isArray(data.articles)) continue;
                 if (data && data.length && data[0].url) {
                     return data.map(a => ({
                         title: a.title,

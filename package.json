@@ -1,6 +1,6 @@
 {
   "name": "deforestation-io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Global deforestation monitoring platform with interactive maps and live data",
   "main": "index.html",
   "scripts": {
@@ -19,7 +19,6 @@
   ],
   "author": "deforestation.io Team",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "http-server": "^14.1.1"
   }
