@@ -1478,7 +1478,7 @@ const ForestData = {
             summary: "New INPE data shows accelerated forest loss in Brazil's Legal Amazon, with Rondônia and Pará states most affected by cattle ranching expansion.",
             source: "Environmental Monitor",
             time: "2 hours ago",
-            url: "https://example.com/news/amazon-deforestation-increase",
+            url: "https://deforestation.io/news/amazon-deforestation-increase",
             category: "deforestation",
             region: "South America",
             severity: "high"
@@ -1488,7 +1488,7 @@ const ForestData = {
             summary: "Government announces extension of moratorium on new palm oil permits in primary forests and peatlands across Sumatra and Kalimantan.",
             source: "Forest News International",
             time: "4 hours ago",
-            url: "https://example.com/news/indonesia-palm-oil-moratorium",
+            url: "https://deforestation.io/news/indonesia-palm-oil-moratorium",
             category: "policy",
             region: "Southeast Asia",
             severity: "positive"
@@ -1498,7 +1498,7 @@ const ForestData = {
             summary: "Community-led conservation initiatives and improved monitoring systems lead to significant decrease in deforestation across Central African Republic.",
             source: "Conservation Today",
             time: "6 hours ago",
-            url: "https://example.com/news/congo-basin-conservation-success",
+            url: "https://deforestation.io/news/congo-basin-conservation-success",
             category: "conservation",
             region: "Africa",
             severity: "positive"
@@ -1508,7 +1508,7 @@ const ForestData = {
             summary: "Rising temperatures and prolonged drought conditions create unprecedented fire risk across northern Canada's vast boreal forest regions.",
             source: "Climate Watch",
             time: "8 hours ago",
-            url: "https://example.com/news/canada-wildfire-risk",
+            url: "https://deforestation.io/news/canada-wildfire-risk",
             category: "climate",
             region: "North America",
             severity: "moderate"
@@ -1518,7 +1518,7 @@ const ForestData = {
             summary: "New five-year initiative aims to restore 500,000 hectares of degraded forest landscapes with native species across the island nation.",
             source: "Restoration Report",
             time: "12 hours ago",
-            url: "https://example.com/news/madagascar-reforestation-program",
+            url: "https://deforestation.io/news/madagascar-reforestation-program",
             category: "restoration",
             region: "Africa",
             severity: "positive"
@@ -1528,7 +1528,7 @@ const ForestData = {
             summary: "New satellite technology detects previously unmonitored small-scale forest loss worldwide, showing every hectare matters for climate goals.",
             timestamp: "2024-01-22T14:15:00Z",
             location: "Global",
-            url: "https://example.com/news/global-forest-monitoring-expansion",
+            url: "https://deforestation.io/news/global-forest-monitoring-expansion",
             category: "monitoring",
             region: "Global",
             severity: "urgent"
@@ -1538,7 +1538,7 @@ const ForestData = {
             summary: "Study shows even minimal forest conversion in developed countries significantly impacts local climate and biodiversity.",
             timestamp: "2024-01-21T11:45:00Z",
             location: "Europe",
-            url: "https://example.com/news/european-urban-forest-loss",
+            url: "https://deforestation.io/news/european-urban-forest-loss",
             category: "urban",
             region: "Europe",
             severity: "moderate"
@@ -1548,7 +1548,7 @@ const ForestData = {
             summary: "Research reveals that cumulative impact of minor forest clearing for development equals major deforestation events.",
             timestamp: "2024-01-20T16:30:00Z",
             location: "North America",
-            url: "https://example.com/news/north-america-cumulative-deforestation",
+            url: "https://deforestation.io/news/north-america-cumulative-deforestation",
             category: "research",
             region: "North America",
             severity: "moderate"
@@ -1558,7 +1558,7 @@ const ForestData = {
             summary: "New climate models show that preventing even minimal deforestation is crucial for meeting 1.5°C temperature targets.",
             timestamp: "2024-01-19T09:20:00Z",
             location: "Global",
-            url: "https://example.com/news/every-tree-counts-climate",
+            url: "https://deforestation.io/news/every-tree-counts-climate",
             category: "climate",
             region: "Global",
             severity: "critical"
@@ -1568,7 +1568,7 @@ const ForestData = {
             summary: "Comprehensive monitoring reveals extensive but previously undetected forest quality decline across the region.",
             timestamp: "2024-01-18T13:10:00Z",
             location: "Asia-Pacific",
-            url: "https://example.com/news/asia-pacific-forest-degradation",
+            url: "https://deforestation.io/news/asia-pacific-forest-degradation",
             category: "degradation",
             region: "Asia",
             severity: "high"
@@ -1578,7 +1578,7 @@ const ForestData = {
             summary: "Environmental groups report illegal clearing of 45 hectares for luxury resort construction on Thailand's popular island, violating national park buffer zones.",
             timestamp: "2024-01-23T16:45:00Z",
             location: "Koh Phangan, Thailand",
-            url: "https://example.com/news/koh-phangan-deforestation",
+            url: "https://deforestation.io/news/koh-phangan-deforestation",
             category: "tourism",
             region: "Southeast Asia",
             severity: "high"
@@ -1588,7 +1588,7 @@ const ForestData = {
             summary: "Satellite imagery reveals unauthorized forest clearing for luxury villa construction on Phuket's protected hillsides, prompting government investigation.",
             timestamp: "2024-01-22T14:20:00Z",
             location: "Phuket, Thailand",
-            url: "https://example.com/news/phuket-illegal-villas",
+            url: "https://deforestation.io/news/phuket-illegal-villas",
             category: "development",
             region: "Southeast Asia",
             severity: "moderate"
@@ -1598,7 +1598,7 @@ const ForestData = {
             summary: "UNESCO-protected rice terraces in Ubud face conversion to hotel developments, threatening traditional agricultural practices and forest buffers.",
             timestamp: "2024-01-21T11:30:00Z",
             location: "Ubud, Bali",
-            url: "https://example.com/news/bali-cultural-landscape-threat",
+            url: "https://deforestation.io/news/bali-cultural-landscape-threat",
             category: "tourism",
             region: "Southeast Asia",
             severity: "moderate"
@@ -1608,7 +1608,7 @@ const ForestData = {
             summary: "Small-scale but critical forest loss in Fiji, Tahiti, and other Pacific islands threatens biodiversity hotspots and climate resilience.",
             timestamp: "2024-01-20T09:15:00Z",
             location: "Pacific Islands",
-            url: "https://example.com/news/pacific-islands-deforestation",
+            url: "https://deforestation.io/news/pacific-islands-deforestation",
             category: "islands",
             region: "Oceania",
             severity: "moderate"
@@ -1618,7 +1618,7 @@ const ForestData = {
             summary: "Jamaica's Blue Mountain coffee industry growth leads to encroachment into protected forest areas, raising sustainability concerns.",
             timestamp: "2024-01-19T15:40:00Z",
             location: "Jamaica",
-            url: "https://example.com/news/jamaica-coffee-deforestation",
+            url: "https://deforestation.io/news/jamaica-coffee-deforestation",
             category: "agriculture",
             region: "Caribbean",
             severity: "moderate"
@@ -1628,7 +1628,7 @@ const ForestData = {
             summary: "Cyprus, Sardinia, and Mallorca report increased forest conversion for tourism infrastructure, threatening endemic species habitats.",
             timestamp: "2024-01-18T12:25:00Z",
             location: "Mediterranean",
-            url: "https://example.com/news/mediterranean-tourism-forests",
+            url: "https://deforestation.io/news/mediterranean-tourism-forests",
             category: "tourism",
             region: "Europe",
             severity: "moderate"
@@ -1638,7 +1638,7 @@ const ForestData = {
             summary: "Vancouver, Rio de Janeiro, and Nairobi among cities losing urban forest cover to development pressure, impacting air quality and climate resilience.",
             timestamp: "2024-01-17T10:50:00Z",
             location: "Global Cities",
-            url: "https://example.com/news/urban-forest-loss-global",
+            url: "https://deforestation.io/news/urban-forest-loss-global",
             category: "urban",
             region: "Global",
             severity: "high"
@@ -1648,7 +1648,7 @@ const ForestData = {
             summary: "Rapid coffee plantation growth in Vietnam's Central Highlands encroaches on protected forest areas, threatening endemic species and watershed protection.",
             timestamp: "2024-01-16T13:35:00Z",
             location: "Vietnam Central Highlands",
-            url: "https://example.com/news/vietnam-coffee-forest-loss",
+            url: "https://deforestation.io/news/vietnam-coffee-forest-loss",
             category: "agriculture",
             region: "Southeast Asia",
             severity: "high"
@@ -1658,7 +1658,7 @@ const ForestData = {
             summary: "London, Paris, and Amsterdam face increasing pressure to develop protected green spaces as housing demands rise, threatening urban forest conservation.",
             timestamp: "2024-01-15T08:20:00Z",
             location: "European Cities",
-            url: "https://example.com/news/european-green-belt-pressure",
+            url: "https://deforestation.io/news/european-green-belt-pressure",
             category: "urban",
             region: "Europe",
             severity: "moderate"
@@ -1668,7 +1668,7 @@ const ForestData = {
             summary: "Nairobi's Karura Forest and Accra's Achimota Reserve face encroachment from growing urban populations, highlighting need for inclusive conservation.",
             timestamp: "2024-01-14T17:10:00Z",
             location: "African Cities",
-            url: "https://example.com/news/african-urban-forest-encroachment",
+            url: "https://deforestation.io/news/african-urban-forest-encroachment",
             category: "urban",
             region: "Africa",
             severity: "high"
